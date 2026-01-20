@@ -54,7 +54,7 @@
             "grade" => "B-"
         ];
 
-        $text = "{$student['name']}'s student ID is{$student['studentId']}" .
+        $text = "{$student['name']}'s student ID is {$student['studentId']}" .
         " and his course is {$student['course']}. He got a {$student['grade']}.";
 
         print("<p>$text</p>");
@@ -73,7 +73,19 @@
     <p class="output-label">Output:</p>
     <div class="output">
         <?php
-        // TODO: Write your solution here
+        $countries = [
+            "Ireland" => "Dublin",
+            "England" => "London",
+            "Spain" => "Madrid",
+            "China" => "Beijing",
+            "France" => "Paris"
+        ];
+
+        echo "<ul>";
+        foreach ($countries as $country => $capital){
+            echo "<li>$capital is the capital of $country";
+        }
+        echo "</ul>";
         ?>
     </div>
 
@@ -90,7 +102,38 @@
     <p class="output-label">Output:</p>
     <div class="output">
         <?php
-        // TODO: Write your solution here
+        
+        $menu = [
+            'starters'=>[
+                'wings' => "£10.99",
+                'soup' => "£8.99",
+                'bread' => "£7.99",
+                'prawns' => "£15.99",
+                'potatoes' => "£14.99"
+            ],
+            'mains'=>[
+                'steak' => "£40.00",
+                'pasta' => "£25.00",
+                'sausage' => "£16.00",
+                'turkey ass' => "£1000.00"
+            ],
+            'deserts'=>[
+                'ice cream' => "£5.00",
+                'truffles' => "£8.99",
+                'brownie' => "£10.99"
+        
+            ]
+         ];
+
+         foreach ($menu as $section => $items){
+            echo "<p>" . ucfirst($section) . " menu:</p>";
+            echo "<ul>";
+            foreach ($items as $key => $value) {
+                echo "<li>$key\t($value)</li>";
+            }
+            echo "</ul>";
+         }
+
         ?>
     </div>
 
