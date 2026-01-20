@@ -31,7 +31,7 @@
         $age = "22";
         $city = "Dublin";
 
-        echo "My name is $firstname $lastname";
+        echo "My name is $firstname $lastname i am $age and i live in $city";
         ?>
     </div>
 
@@ -48,7 +48,7 @@
     <p class="output-label">Output:</p>
     <div class="output">
         <?php
-        // TODO: Write your solution here
+        
         ?>
     </div>
 
@@ -63,7 +63,15 @@
     <p class="output-label">Output:</p>
     <div class="output">
         <?php
-        // TODO: Write your solution here
+        $isStudent = true;
+        $hasDiscount = true;
+        $isPremiumMember = false;
+
+        echo "Is student: " . ($isStudent ? "Yes" : "No") . "<br>";
+        echo "Has Discount: " . ($hasDiscount ? "Yes" : "No") . "<br>";
+        echo "Is a premium member: " . ($isPremiumMember ? "Yes" : "No");
+
+
         ?>
     </div>
 
