@@ -26,7 +26,22 @@
     <p class="output-label">Output:</p>
     <div class="output">
         <?php
-        // TODO: Write your solution here
+        $age = rand (0, 65);
+
+        if ($age >= 0 &&  $age <= 12 ) {
+        echo "<p> $age This is a child</p>";
+        }
+        elseif ($age >= 13 && $age <= 19) {
+            echo "<p> $age This is a teenager</p>";
+        }
+        elseif ($age >= 20 && $age <= 64) {
+            echo "<p> $age This is an adult</p>";
+        }
+        else {
+            echo "<p>$age This is a senior</p>";
+        }
+
+
         ?>
     </div>
 
