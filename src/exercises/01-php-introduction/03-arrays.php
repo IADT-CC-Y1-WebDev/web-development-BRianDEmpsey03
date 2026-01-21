@@ -26,7 +26,7 @@
     <p class="output-label">Output:</p>
     <div class="output">
         <?php
-        $movies = ['null','Shawshank redemption', 'Mulholland Drive', 'Monsters Inc', 'live at the Rose Bowl', 'The Doors'];
+        $movies = ['null','Shawshank redemption', 'Mulholland Drive', 'goodfellas', 'live at the Rose Bowl', 'The Doors'];
         echo "<ul>";
         for ($i = 1; $i < count($movies); $i++) {
         echo "<li>Movie $i: $movies[$i]</li>";
