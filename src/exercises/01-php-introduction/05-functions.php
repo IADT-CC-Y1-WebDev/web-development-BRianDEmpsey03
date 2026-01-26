@@ -24,7 +24,11 @@
     <p class="output-label">Output:</p>
     <div class="output">
         <?php
-        // TODO: Write your solution here
+        function celsiusToFahrenheit(celcius) {
+            $celcius = 5;
+            F = (celcius × 9/5) + 32
+            print("$F");
+        }
         ?>
     </div>
 
