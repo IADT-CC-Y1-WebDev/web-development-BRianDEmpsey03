@@ -2,10 +2,15 @@
 
 class Student {
 
-public $name;
-public $number;
+protected $name;
+protected $number;
 
     public function __construct($name, $number) {
+
+        if (empty($number)) {
+            throw new Exception("Name cannot be empty");
+        }
+        
         $this->number = $number;
         $this->name = $name;
     }

@@ -33,8 +33,11 @@
     <p class="output-label">Output:</p>
     <div class="output">
         <?php
-        // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/Student.php';
+         require_once __DIR__ . '/classes/Student.php';
+
+         $student = new Student("Greg", "27263");
+
+         echo "Student " . $student->getName();
         ?>
     </div>
 
@@ -54,8 +57,12 @@
     <p class="output-label">Output:</p>
     <div class="output">
         <?php
-        // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/Student.php';
+        require_once __DIR__ . '/classes/Student.php';
+
+        $student = new Student("Carmine", "4273637");
+
+        echo "Student name " . $student->getName() . "\n" ;
+        echo "Student number " . $student->getNumber();
         ?>
     </div>
 
@@ -75,13 +82,14 @@
     <p class="output-label">Output:</p>
     <div class="output">
         <?php
-        // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/Student.php';
-        // try {
-        //     $student = new Student("Alice", "");
-        // } catch (Exception $e) {
-        //     echo "Error: " . $e->getMessage();
-        // }
+        require_once __DIR__ . '/classes/Student.php';
+        try {
+            $student = new Student("Alice", "");
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+
+        // $student = new Student("Jeff", "");
         ?>
     </div>
 
