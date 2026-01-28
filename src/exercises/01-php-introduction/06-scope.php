@@ -82,7 +82,7 @@
     <p class="output-label">Output:</p>
     <div class="output">
         <?php
-        
+
         $message = "global";
 
         function testScope($message){
@@ -91,7 +91,7 @@
             echo "<p>changed to $message</p>";
 
         }
-        testScope("inside");
+        testScope("hello");
         echo "<p>outside $message</p>";
         
 
