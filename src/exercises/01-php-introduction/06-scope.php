@@ -82,15 +82,17 @@
     <p class="output-label">Output:</p>
     <div class="output">
         <?php
-        $message = "global"
+        
+        $message = "global";
 
         function testScope($message){
-            echo "inside $message" 
-            $message = "Local"
-            
+            echo "<p>inside $message</p>" ;
+            $message = "Local";
+            echo "<p>changed to $message</p>";
+
         }
-        testScope("inside")
-        echo ("$message");
+        testScope("inside");
+        echo "<p>outside $message</p>";
         
 
         ?>
