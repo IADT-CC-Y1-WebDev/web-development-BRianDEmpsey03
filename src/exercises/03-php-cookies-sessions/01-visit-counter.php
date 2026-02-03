@@ -1,11 +1,14 @@
 <?php
-// =============================================================================
-// EXERCISE: Visit Counter with Cookies
-// =============================================================================
-// Complete the TODO sections below to create a visit counter using cookies.
-// Remember: setcookie() must be called BEFORE any HTML output!
-// =============================================================================
+ $expiryTime = time() + (60*60*24*30);
 
+        setcookie('visit_count', 1, $expiryTime, '/');
+
+        if (isset($COOKIE['visit_count'])) {
+            $visitCount = (int)$_COOKIE['visit_count'];
+            echo "you have visited $visitCount times.";
+        } else {
+            echo "this is your first visit";
+        }
 // =============================================================================
 // Exercise 1: Display Visit Count
 // Task: Complete the PHP code at the top of this file to:
@@ -67,13 +70,18 @@
     <p class="output-label">Output:</p>
     <div class="output">
         <?php
-        // =====================================================================
-        // Exercise 1: Display the visit count
-        // ---------------------------------------------------------------------
-        // TODO Exercise 1: Write your solution here
+        $expiryTime = time() + (60*60*24*30);
 
-        // =====================================================================
-        ?>
+        setcookie('visit_count', 1, $expiryTime, '/');
+
+        if (isset($COOKIE['visit_count'])) {
+            $visitCount = (int)$_COOKIE['visit_count'];
+            echo "you have visited $visitCount times.";
+        } else {
+            echo "this is your first visit";
+        }
+
+       ?>
     </div>
 
     <!-- Exercise 2: First Visit Detection -->
