@@ -11,6 +11,10 @@ require_once 'etc/config.php';
 // Exercise 1: Start the session
 // -----------------------------------------------------------------------------
 // TODO: Write your code here
+if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }  
+
 
 // =============================================================================
 
@@ -24,7 +28,7 @@ new Product(4, 'Hat', 14.99, 'Baseball cap');
 // Exercise 2: Initialize the cart
 // -----------------------------------------------------------------------------
 // TODO: Write your code here
- 
+ $cart = ShoppingCart::getInstance();
 // =============================================================================
 
 // =============================================================================
@@ -36,11 +40,25 @@ new Product(4, 'Hat', 14.99, 'Baseball cap');
 // 4. Redirect back to products.php
 // -----------------------------------------------------------------------------
 // TODO: Write your code here
-
+if (isset($_GET['add'])){
+    $id = (int)$_GET['add'];
+    $product = Product :: findbyID($id);
+    if ($product !== null){
+        $cart -> add($product);
+    }
+    // redirect to products page
+    header("Location: products.php");
+    exit();
+}
 // =============================================================================
 
 // Calculate cart count (this is provided for you)
 $cartCount = isset($cart) ? $cart->getCount() : 0;
+
+
+echo "<pre>";
+print_r($_SESSION);
+echo "</pre>";
 ?>
 <!DOCTYPE html>
 <html lang="en">
