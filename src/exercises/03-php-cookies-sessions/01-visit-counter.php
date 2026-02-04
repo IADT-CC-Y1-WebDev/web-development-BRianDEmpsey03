@@ -70,16 +70,7 @@
     <p class="output-label">Output:</p>
     <div class="output">
         <?php
-        $expiryTime = time() + (60*60*24*30);
-
-        setcookie('visit_count', 1, $expiryTime, '/');
-
-        if (isset($COOKIE['visit_count'])) {
-            $visitCount = (int)$_COOKIE['visit_count'];
-            echo "you have visited $visitCount times.";
-        } else {
-            echo "this is your first visit";
-        }
+        
 
        ?>
     </div>
