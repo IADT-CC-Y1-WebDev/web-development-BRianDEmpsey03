@@ -21,7 +21,7 @@ startSession();
         <a href="index.php">&larr; Back to Form Handling </a>
     </div>
 
-    <h1>success</h1>
+    <h1>Success!</h1>
 
     <!-- Display form data and errors for debugging purposes                 -->
     <?php dd(getFormData()); ?>
