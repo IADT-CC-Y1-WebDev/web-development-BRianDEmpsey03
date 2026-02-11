@@ -89,7 +89,7 @@ try {
         'isbn' => 'required|notempty|min:13|max:13',
         'format_ids' => 'required|notempty|array|min:1|max:4',
         'description' => 'required|notempty|min:10',
-        'cover' => 'required|file|image|mimes:jpg,jpeg,png|max_file_size:5242880'
+        'cover' => 'required|file' //|image|mimes:jpg,jpeg,png|max_file_size:5242880'
     ];
 
     $validator = new Validator($data, $rules);
@@ -101,11 +101,11 @@ try {
         throw new Exception('Validation failed.');
     }
 
-    $uploader = new ImageUpload();
-    $imageFilename = $uploader->process($_FILES['cover']);
+    // $uploader = new ImageUpload();
+    // $imageFilename = $uploader->process($_FILES['cover']);
 
 
-    echo "Validation passed!";
+    // echo "Validation passed!";
 
     // =========================================================================
     // STEP 9: File Uploads
@@ -130,7 +130,8 @@ try {
     // See: /examples/04-php-forms/step-10-complete/
     // =========================================================================
     // TODO: Clear form data on success (before redirect)
-
+        clearFormData();
+        clearFormErrors();
 
     // =========================================================================
     // STEP 8: Flash Messages
@@ -138,6 +139,12 @@ try {
     // =========================================================================
     // TODO: On successful registration, set a success flash message and
     // redirect back to the form
+
+    setFlashMessage('success', 'Validation successful');
+
+    
+    redirect("success.php");
+
 }
 catch (Exception $e) {
     // =========================================================================
@@ -163,6 +170,9 @@ catch (Exception $e) {
     // See: /examples/04-php-forms/step-08-flash-messages/
     // =========================================================================
     // TODO: On validation error, you set an error flash message
+
+    setFlashMessage('error', 'Error: ' . $e->getMessage());
+    
 
     redirect('book_create.php');
 

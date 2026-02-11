@@ -49,10 +49,11 @@ $formats = [
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include './inc/head_content.php'; ?>
+    <?php include 'inc/head_content.php'; ?>
     <title>Add New Book - Exercise</title>
 </head>
 <body>
+    <?php require 'inc/flash_message.php';?>
     <div class="back-link">
         <a href="index.php">&larr; Back to Form Handling </a>
     </div>
@@ -60,8 +61,8 @@ $formats = [
     <h1>Add New Book</h1>
 
     <!-- Display form data and errors for debugging purposes                 -->
-    <?php dd(getFormData()); ?>
-    <?php dd(getFormErrors()); ?>
+    <?php // dd(getFormData()); ?>
+    <?php // dd(getFormErrors()); ?>
 
     <!-- =================================================================== -->
     <!-- STEP 8: Flash Messages                                              -->
