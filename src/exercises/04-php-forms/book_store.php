@@ -40,7 +40,6 @@ try {
     // See: /examples/04-php-forms/step-02-request-method/
     // =========================================================================
     // TODO: Check that the request method is POST
-
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         throw new Exception('Invalid request method.');
     }
@@ -89,7 +88,7 @@ try {
         'isbn' => 'required|notempty|min:13|max:13',
         'format_ids' => 'required|notempty|array|min:1|max:4',
         'description' => 'required|notempty|min:10',
-        'cover' => 'required|file' //|image|mimes:jpg,jpeg,png|max_file_size:5242880'
+        'cover' => 'required|file|max_file_size:5242880'
     ];
 
     $validator = new Validator($data, $rules);
@@ -100,10 +99,6 @@ try {
         }
         throw new Exception('Validation failed.');
     }
-
-    // $uploader = new ImageUpload();
-    // $imageFilename = $uploader->process($_FILES['cover']);
-
 
     // echo "Validation passed!";
 
@@ -123,7 +118,9 @@ try {
     // If there is an upload error, add to an error to the $errors array and
     // throw an exception
     // Hint: Use the ImageUpload class to handle the upload
-
+    
+    $uploader = new ImageUpload();
+    $imageFilename = $uploader->process($_FILES['cover']);
 
     // =========================================================================
     // STEP 10: Complete Handler
