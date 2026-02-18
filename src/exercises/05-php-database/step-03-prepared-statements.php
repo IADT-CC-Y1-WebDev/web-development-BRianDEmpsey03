@@ -42,8 +42,24 @@ catch (PDOException $e) {
             <?php
             // TODO: Write your solution here
             // 1. Prepare: SELECT * FROM books WHERE id = :id
+
             // 2. Execute with ['id' => 1]
+
+            $id = 1;
+
+            $stmt = $db->prepare("SELECT * FROM books WHERE id = :id");
+
+            $stmt->execute(['id' => $id]);
+
             // 3. Fetch and display result
+
+            $book = $stmt->fetch();
+            if ($book) {
+                echo "Found: " . $book['title'] . "<p>Author: " . $book['author'];
+            } else {
+                echo "Book not found";
+            }
+                        
             ?>
         </div>
 
@@ -59,10 +75,24 @@ catch (PDOException $e) {
         <h3>Your Solution:</h3>
         <div class="output">
             <?php
-            // TODO: Write your solution here
-            // 1. Prepare: SELECT * FROM books WHERE author LIKE :search
-            // 2. Execute with ['search' => '%George%']
-            // 3. Loop through and display results
+            
+            $search = 'george';
+
+            $stmt = $db->prepare("SELECT * FROM books WHERE author LIKE :search ORDER BY author");
+            $stmt->execute(['search' => "%$search%"]);
+
+            $books = $stmt->fetchAll();
+
+            if ($books) {
+                foreach ($books as $book) {
+                    echo "<p>" . $book['title'] . "<br>";
+                    echo "Author: " . $book['author'] . "</p>";
+                }
+            } else {
+                echo "No books found.";
+            }
+           
+            
             ?>
         </div>
     </div>
