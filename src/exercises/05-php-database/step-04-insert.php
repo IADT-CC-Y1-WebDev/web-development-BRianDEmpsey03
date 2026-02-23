@@ -51,11 +51,34 @@ catch (PDOException $e) {
         <div class="output">
             <?php
             // TODO: Write your solution here
-            // 1. Prepare INSERT INTO books (title, author, ...) VALUES (:title, :author, ...)
-            // 2. Execute with the book data
-            // 3. Check rowCount() === 1
-            // 4. Get lastInsertId()
-            // 5. Display success message with the new ID
+            function insertBook($db, $title, $author, $publisher_id, $year, $description) {
+                $stmt = $db->prepare("
+                INSERT INTO books (title, author, publisher_id, year, description)
+                VALUES (:title, :author, :publisher_id, :year, :description)
+                ");
+                
+                // 2. Execute with the book data
+                $params = [
+                    'title' => $title,
+                    'author' => $author,
+                    'publisher_id' => $publisher_id,
+                    'year' => $year,
+                    'description' => $description
+                ];
+
+                $status = $stmt->execute($params);
+
+                if (!$status || $stmt->rowCount() !== 1) {
+                    throw new Exception("Failed to insert book.");
+                }
+            
+
+                return $db->lastInsertId();
+            }
+
+            $newId = insertBook($db, 'My Favorite Book', 'Brian', 1, 2024, 'A book I created for learning PDO');
+
+            echo $newId;
             ?>
         </div>
     </div>

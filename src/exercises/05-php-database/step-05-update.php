@@ -47,6 +47,8 @@ catch (PDOException $e) {
             // 3. Execute with new description + timestamp
             // 4. Check rowCount()
             // 5. Fetch and display updated book
+
+            
             ?>
         </div>
     </div>
