@@ -1,4 +1,7 @@
 <?php
+
+require_once "./php/lib/config.php";
+
 try {
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         throw new Exception('Invalid request method.');
@@ -56,11 +59,14 @@ try {
    
     $book->save();
 
-   
-    foreach ($data['format_ids'] as $formatId) {
-        $book->addFormat($formatId);
+    if (!empty($data['format_ids']) && is_array($data['format_ids'])) {
+        foreach ($data['format_ids'] as $formatId) {
+            // Verify platform exists before creating relationship
+            if (Format::findById($formatId)) {
+                GamePlatform::create($game->id, $platformId);
+            }
+        }
     }
-
     
     setFlashMessage('success', 'Book created successfully!');
     redirect('book_create.php');

@@ -54,12 +54,12 @@ class Format {
         ");
         $stmt->execute(['book_id' => $bookId]);
 
-        $platforms = [];
+        $formats = [];
         while ($row = $stmt->fetch()) {
-            $platforms[] = new Platform($row);
+            $formats[] = new Format($row);
         }
 
-        return $platforms;
+        return $formats;
     }
     
     // Convert to array for JSON output
