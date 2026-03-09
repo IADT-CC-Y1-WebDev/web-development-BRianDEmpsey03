@@ -154,8 +154,8 @@ class Book
             'publisher_id' => $this->publisher_id,
             'year' => $this->year,
             'isbn' => $this->isbn,
-            'description' = $this->description,
-            'cover_filename' = $this->cover_filename
+            'description' => $this->description,
+            'cover_filename' => $this->cover_filename
         ];
         } else {
             // Insert new record
@@ -170,8 +170,8 @@ class Book
             'publisher_id' => $this->publisher_id,
             'year' => $this->year,
             'isbn' => $this->isbn,
-            'description' = $this->description,
-            'cover_filename' = $this->cover_filename
+            'description' => $this->description,
+            'cover_filename' => $this->cover_filename
         ];
         }
 
@@ -213,8 +213,8 @@ class Book
             'publisher_id' => $this->publisher_id,
             'year' => $this->year,
             'isbn' => $this->isbn,
-            'description' = $this->description,
-            'cover_filename' = $this->cover_filename
-        ]
+            'description' => $this->description,
+            'cover_filename' => $this->cover_filename
+        ];
     }
 }

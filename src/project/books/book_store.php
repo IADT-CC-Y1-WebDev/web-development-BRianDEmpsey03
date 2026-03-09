@@ -12,8 +12,9 @@ try {
         'year' => $_POST['year'] ?? null,
         'isbn' => $_POST['isbn'] ?? null,
         'description' => $_POST['description'] ?? null,
-        'format_ids' => $_POST['format_ids'] ?? [],   
-        'cover' => $_FILES['cover'] ?? null          
+        'cover' => $_FILES['cover'] ?? null,
+        'format_ids' => $_POST['format_ids'] ?? []
+                 
     ];
 
     
