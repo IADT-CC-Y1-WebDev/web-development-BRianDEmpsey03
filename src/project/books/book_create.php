@@ -48,7 +48,7 @@ $formats = [
                 <h1>Create Book</h1>
             </div>
             <div class="width-12"> 
-                <form action="book_store.php" method="POST" enctype="multipart/form-data" novlidate>
+                <form action="book_store.php" method="POST" enctype="multipart/form-data">
 
                     <div class="form-group">
                         <label for="title">Title:</label>

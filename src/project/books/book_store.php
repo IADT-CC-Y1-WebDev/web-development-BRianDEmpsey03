@@ -1,6 +1,11 @@
 <?php
 
 require_once "./php/lib/config.php";
+require_once "./php/lib/session.php";
+require_once "./php/lib/utils.php";
+require_once "./php/lib/forms.php";
+require_once "./php/classes/Validator.php";
+require_once "./php/inc/flash_message.php";
 
 try {
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -60,13 +65,12 @@ try {
     $book->save();
 
     if (!empty($data['format_ids']) && is_array($data['format_ids'])) {
-        foreach ($data['format_ids'] as $formatId) {
-            // Verify platform exists before creating relationship
-            if (Format::findById($formatId)) {
-                GamePlatform::create($game->id, $platformId);
-            }
+    foreach ($data['format_ids'] as $formatId) {
+        if (Format::findById($formatId)) {
+            BookFormat::create($book->id, $formatId);
         }
     }
+}
     
     setFlashMessage('success', 'Book created successfully!');
     redirect('book_create.php');

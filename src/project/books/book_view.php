@@ -1,5 +1,8 @@
 <?php
-require_once 'php/lib/config.php';
+require_once "./php/lib/config.php";
+require_once "./php/lib/session.php";
+require_once "./php/lib/utils.php";
+require_once "./php/lib/forms.php";
 
 if ($_SERVER['REQUEST_METHOD'] !== 'GET' || !array_key_exists('id', $_GET)) {
     die("<p>Error: No book ID provided.</p>");
