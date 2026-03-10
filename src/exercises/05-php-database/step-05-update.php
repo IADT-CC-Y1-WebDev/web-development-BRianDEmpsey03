@@ -43,6 +43,9 @@ catch (PDOException $e) {
             <?php
             // TODO: Write your solution here
             // 1. Fetch and display book ID 1
+            $stmt = $pdo->prepare("SELECT * FROM books WHERE id = :id");
+            $stmt->execute([':id' => 1])
+            $book = $stmt->fetch();
             // 2. Prepare: UPDATE books SET description = :description WHERE id = :id
             // 3. Execute with new description + timestamp
             // 4. Check rowCount()

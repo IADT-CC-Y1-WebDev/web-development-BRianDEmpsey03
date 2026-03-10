@@ -67,7 +67,7 @@ try {
         }
     }
 
-    // Process uploaded image (optional)
+    
     $coverFilename = null;
     $uploader = new ImageUpload();
     if ($uploader->hasFile('cover')) {
@@ -100,7 +100,7 @@ try {
         BookFormat::create($book->id, $formatId);
     }
 
-    // Clear form session data
+    
     clearFormData();
     clearFormErrors();
 
@@ -108,7 +108,7 @@ try {
     redirect('book_view.php?id=' . $book->id);
 
 } catch (Exception $e) {
-    // Clean up uploaded image if there was an error
+    
     if ($coverFilename) {
         $uploader->deleteImage($coverFilename);
     }
@@ -117,7 +117,7 @@ try {
     setFormData($data);
     setFormErrors($errors);
 
-    // Redirect back to edit page
+    // Redirect
     if (isset($data['id']) && $data['id']) {
         redirect('book_edit.php?id=' . $data['id']);
     } else {
