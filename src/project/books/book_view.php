@@ -17,7 +17,8 @@ try {
 
     $publisher = Publisher::findById($book->publisher_id);
 
-    $stmt = $pdo->prepare("
+    $db = DB::getInstance()->getConnection();
+    $stmt = $db->prepare("
         SELECT f.name 
         FROM formats f
         JOIN book_format bf ON f.id = bf.format_id
@@ -25,7 +26,7 @@ try {
     ");
     $stmt->execute(['book_id' => $book->id]);
     $formats = $stmt->fetchAll(PDO::FETCH_COLUMN);
-} 
+    } 
 catch (PDOException $e) {
     setFlashMessage('error', 'Error: ' . $e->getMessage());
     redirect('/index.php');

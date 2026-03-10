@@ -41,9 +41,9 @@ catch (PDOException $e) {
                             <div class="bottom-content">
                                 <img src="images/<?= h($book->cover_filename) ?>" alt="Image for <?= h($book->title) ?>" />
                                 <div class="actions">
-                                    <a href="game_view.php?id=<?= h($book->id) ?>">View</a>/ 
-                                    <a href="game_edit.php?id=<?= h($book->id) ?>">Edit</a>/ 
-                                    <a href="game_delete.php?id=<?= h($book->id) ?>">Delete</a>
+                                    <a href="book_view.php?id=<?= h($book->id) ?>">View</a>/ 
+                                    <a href="book_edit.php?id=<?= h($book->id) ?>">Edit</a>/ 
+                                    <a href="book_delete.php?id=<?= h($book->id) ?>">Delete</a>
                                 </div>
                             </div>
                         </div>

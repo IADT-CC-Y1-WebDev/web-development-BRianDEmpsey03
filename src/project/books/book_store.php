@@ -14,15 +14,15 @@ try {
 
     
     $data = [
-        'title' => $_POST['title'] ?? null,
-        'author' => $_POST['author'] ?? null,
-        'publisher_id' => $_POST['publisher_id'] ?? null,
-        'year' => $_POST['year'] ?? null,
-        'isbn' => $_POST['isbn'] ?? null,
-        'description' => $_POST['description'] ?? null,
-        'cover' => $_FILES['cover'] ?? null,
-        'format_ids' => $_POST['format_ids'] ?? []
-                 
+    'id' => $_POST['id'] ?? null,
+    'title' => $_POST['title'] ?? null,
+    'author' => $_POST['author'] ?? null,
+    'publisher_id' => $_POST['publisher_id'] ?? null,
+    'year' => $_POST['year'] ?? null,
+    'isbn' => $_POST['isbn'] ?? null,
+    'description' => $_POST['description'] ?? null,
+    'cover' => $_FILES['cover'] ?? null,
+    'format_ids' => $_POST['format_ids'] ?? []
     ];
 
     
