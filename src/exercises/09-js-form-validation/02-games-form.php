@@ -118,7 +118,7 @@
         <div class="form-group">
             <label class="form-label" for="title">Title:</label>
             <div>
-                <input type="text" id="title" name="title" data-minlength="3" data-maxlength="255">
+                <input type="text" id="title" name="title" data-minlength="3" data-maxlength="15">
                 <span id="title_error" class="error"></span>
             </div>
         </div>

@@ -70,15 +70,54 @@ function onSubmitForm(evt) {
 
     errors = {};
 
+    let titleMin = titleInput.dataset.minlength || 3;
+    let titleMax = titleInput.dataset.maxlength || 15;
+    let descMin = 10;
+
     // title
-    if(isRequired(titleInput.value)) {
+    if(!isRequired(titleInput.value)) {
         addError('title', 'title is required');
-    } else if (!isMinLength(titleInput.value, 3)){
-        addError('title', 'title must be over 3 chars');
-    } else if (!isMaxLength(titleInput.value, 15)){
-        addError('title', "title must be at most 255 chars");
+    } else if (!isMinLength(titleInput.value, titleMin)){
+        addError('title', 'title must be over' + titleMin + 'chars');
+    } else if (!isMaxLength(titleInput.value, titleMax)){
+        addError('title', 'title must be at most' + titleMax + 'chars');
+    }
+
+    // release date
+    if(!isRequired(releaseDateInput.value)){
+        addError('release_date', 'release year is required');
+    }
+
+    // genre
+    if(!isRequired(genreIdInput.value)){
+        addError('genre_id', 'genre is required');
+    }
+
+    // description
+    if(!isRequired(descriptionInput.value)){
+        addError('description', 'description is required');
+    } else if(!isMinLength(descriptionInput.value, descMin)){
+        addError('description', `Description must be at least ${descMin} characters` )
     }
     
+
+    // platforms
+    let platformSelected = false;
+
+    for(let i = 0; i = platformIdsInput.length; i++){
+        if (platformIdsInput[i].checked){
+            platformSelected = true;
+            break;
+        }
+    }
+
+    if(!platformSelected){
+        addError('platform_ids', 'select at least one platform');
+    }
+
+    // image
+    if(imageInput.files)
+
     showFieldErrors();
     showErrorSummaryTop();
 
