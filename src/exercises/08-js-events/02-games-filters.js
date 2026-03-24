@@ -12,7 +12,12 @@ clearBtn.addEventListener('click', (event) => {
 });
 
 function applyFilters(){
-
+    let filters = getFilters();
+    for (let i = 0; i != cards.length; i++){
+        let card = cards[i];
+        let match = cardMatches(card, filters);
+        card.classList.toggle('hidden', !match);
+    }
 }
 
 function getFilters(){
@@ -24,12 +29,40 @@ function getFilters(){
     let titleFilter = (titleEl. value || '').trim().toLowerCase();
     let genreFilter = genreE1.value || '';
     let platformFilter = platformE1.value || '';
-    let sortFilter = sortEl.value || 'title_asc';
+    let sortBy = sortEl.value || 'title_asc';
+
+    return {
+        "titleFilter" : titleFilter,
+        "genreFilter" : genreFilter,
+        "platformFilter" : platformFilter,
+        "sortBy" : sortBy,
+    };
+   
 }
 
-return
-    "titleFilter" : titleFilter;
+function cardMatches(card, filters){
+   
+    let title = card.dataset.title.toLowerCase();
+    let genre = card.dataset.genre;
+    let platform = card.dataset.platform;
+
+    let matchTitle = title.includes(filters.titleFilter) || filters.titleFilter === "";
+    
+
+}
+
+
 
 function clearFilters(){
     console.log("clearing filters");
+}
+
+
+function matchTitle(card, title){
+    let ttl = title.toLowerCase();
+    let match = false;
+    if (card.dataset.title.includes(title)){
+        match = true;
+    }
+    return match;
 }
