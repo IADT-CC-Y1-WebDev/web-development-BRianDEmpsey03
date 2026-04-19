@@ -24,7 +24,6 @@ catch (PDOException $e) {
             <div class="width-12 header">
                 <h1>Surfin Bird</h1>
                 <?php require 'php/inc/flash_message.php'; ?>
-                <h1>Book Store</h1>
                 <div class="button">
                     <a href="book_create.php">Add New Book</a>
                 </div>
