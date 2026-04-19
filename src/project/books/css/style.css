@@ -190,3 +190,9 @@ form {
 	color: #252525;
 	font-weight: 900;
 }
+
+
+.submits{
+	display: flex;
+	justify-content: space-between;
+}

@@ -73,7 +73,7 @@ try {
 }
     
     setFlashMessage('success', 'Book created successfully!');
-    redirect('book_create.php');
+    redirect('book_view.php?id=' . $book->id);
 
 } catch (Exception $e) {
     

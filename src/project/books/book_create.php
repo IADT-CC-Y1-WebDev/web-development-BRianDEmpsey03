@@ -37,16 +37,22 @@ $formats = [
 <html lang="en">
     <head>
         <?php include 'php/inc/head_content.php'; ?>
-        <title>View Book</title>
+        <title>Create Book</title>
     </head>
     <body>
         <div class="container"> 
+
             <div class="width-12">
                 <?php require 'php/inc/flash_message.php'; ?>
             </div>
-            <div class="width-12">
+
+            <div class="width-12 create">
                 <h1>Create Book</h1>
             </div>
+
+                    
+            
+            
             <div class="width-12"> 
                 <form action="book_store.php" method="POST" enctype="multipart/form-data">
 
@@ -128,6 +134,17 @@ $formats = [
                         <?php if (error('format_ids')): ?>
                             <p class="error"><?= error('format_ids') ?></p>
                         <?php endif; ?>
+                    </div>
+                    
+
+                    <div class="input">
+
+                        <button class="button"type="submit">Create Book</button>
+                            
+                        <div class="button">
+                            <a href="index.php">Back</a>
+                        </div>
+                        
                     </div>
 
                     <div class="input">
