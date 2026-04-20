@@ -84,3 +84,8 @@ document.getElementById('clear_filters').addEventListener('click', (e) => {
     e.preventDefault();
     clearFilters();
 });
+
+function myFunction() {
+  var element = document.body;
+  element.classList.toggle("dark-mode");
+}

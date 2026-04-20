@@ -6,6 +6,19 @@ body {
 	background-color: #fff;
 }
 
+.dark-mode{
+	background-color: black;
+	color: white;
+	.card{
+		background-color: #252525;
+		border: 1px solid #525252;
+	}
+	.filters{
+		background-color: #252525;
+	}
+	
+}
+
 .cards {
 	display: flex;
 	gap: 40px 20px;
@@ -29,7 +42,7 @@ body {
 	font-family: "IBM Plex Serif";
 	margin-bottom: 12px;
 	font-weight: 300;
-	color: #016040;
+	color: #009966;
 }
 
 .card p {
@@ -105,7 +118,9 @@ body {
 	align-items: baseline;
 	justify-content: space-between;
 }
-
+.headright{
+	display: flex;
+}
 .button {
 	font-size: 13px;
 	background-color: #123991;

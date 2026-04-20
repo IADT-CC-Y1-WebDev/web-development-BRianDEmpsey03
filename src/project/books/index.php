@@ -22,10 +22,13 @@ catch (PDOException $e) {
     <body>
         <div class="container">
             <div class="width-12 header">
-                <h1>Surfin Bird</h1>
+                <h1>Book Shop</h1>
                 <?php require 'php/inc/flash_message.php'; ?>
+                <div class="headright">
                 <div class="button">
                     <a href="book_create.php">Add New Book</a>
+                </div>
+                <button onclick="myFunction()">Toggle dark mode</button>
                 </div>
             </div>
             <?php if (!empty($books)) { ?>
