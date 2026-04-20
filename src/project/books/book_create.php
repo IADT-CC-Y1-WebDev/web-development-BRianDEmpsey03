@@ -137,20 +137,12 @@ $formats = [
                     </div>
                     
 
-                    <div class="input">
-
-                        <button class="button"type="submit">Create Book</button>
-                            
-                        <div class="button">
-                            <a href="index.php">Back</a>
-                        </div>
-                        
-                    </div>
 
                     <div class="input">
                         <button  class="button" type="submit">Store Book</button>
                         <div class="button"><a href="index.php">Cancel</a></div>
                     </div>
+
                 </form>
             </div>
         </div>
