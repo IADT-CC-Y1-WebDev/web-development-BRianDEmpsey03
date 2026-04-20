@@ -1,6 +1,7 @@
 services:
   mysql-container:
     image: mysql:8.0
+    container_name: mysql-container
     env_file:
       - .env
     ports:
