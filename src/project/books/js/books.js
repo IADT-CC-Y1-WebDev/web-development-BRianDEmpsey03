@@ -1,88 +1,86 @@
-let applyBtn = document.getElementById('apply_filters');
-let clearBtn = document.getElementById('clear_filters');
+const form = document.getElementById('filters');
+const cardsContainer = document.getElementById("book_cards");
+const cards = Array.from(cardsContainer.querySelectorAll('.card'));
 
-let card = document.getElementById("game_cards");
-let cards = document.querySelectorAll('.card');
+function getFilters() {
+    const titleEl = form.elements['title_filter'];
+    const publisherEl = form.elements['publisher_filter'];
+    const formatEl = form.elements['format_filter'];
+    const sortEl = form.elements['sort_by'];
+    return {
+        titleFilter: (titleEl.value || '').trim().toLowerCase(),
+        publisherFilter: publisherEl.value || '',
+        formatFilter: formatEl.value || '',
+        sortBy: sortEl.value || 'title_asc'
+    };
+}
 
-let form = document.getElementById("filters");
+function cardMatches(card, filters) {
+    const title = card.dataset.title.toLowerCase();
+    const publisher = card.dataset.publisher;
 
-applyBtn.addEventListener('click', (event) => {
-    event.preventDefault();
-    applyFilters();
-});
+    const formats = card.dataset.format
+        ? card.dataset.format.split(',')
+        : [];
 
-clearBtn.addEventListener('click', (event) => {
-    event.preventDefault();
-    clearFilters();
-});
+    const matchTitle =
+        filters.titleFilter === '' || title.includes(filters.titleFilter);
 
-function applyFilters() {
-    // console.log("Applying filters");
-    let filters = getFilters();
-    // let matches = [];
-    for (let i = 0; i != cards.length; i++) {
-        let card = cards[i];
-        let match = cardMatches(card, filters);
-        card.classList.toggle('hidden', !match);
-    }
-    let cardsArray = Array.from(cards);
-    const sorted = sortCards(cardsArray, filters.sortBy);
-    sorted.forEach(card => {
-        cardsContainer.appendChild(card);
-    });
+    const matchPublisher =
+        filters.publisherFilter === '' ||
+        publisher === filters.publisherFilter;
+
+    const matchFormat =
+        filters.formatFilter === '' ||
+        formats.includes(filters.formatFilter);
+
+    return matchTitle && matchPublisher && matchFormat;
 }
 
 function sortCards(cards, sortBy) {
     const list = cards.slice();
-    
-    list.sort((a, b) => {
-        let titleA = a.dataset.title.toLowerCase();
-        let titleB = b.dataset.title.toLowerCase();
-        let yearA = Number(a.dataset.year);
-        let yearB = Number(b.dataset.year);
-
-        if (sortBy === "year_desc") return yearB - yearA;
-        if (sortBy === "year_asc") return yearA - yearB;
-
+    list.sort(function (a, b) {
+        const titleA = a.dataset.title.toLowerCase();
+        const titleB = b.dataset.title.toLowerCase();
+        const yearA = Number(a.dataset.year);
+        const yearB = Number(b.dataset.year);
+        if (sortBy === 'year_desc') return yearB - yearA;
+        if (sortBy === 'year_asc') return yearA - yearB;
         return titleA.localeCompare(titleB);
     });
-
     return list;
 }
 
-function cardMatches(crd, fltrs) {
-    // console.log(crd.dataset.title, fltrs.titleFilter);
-    let title = crd.dataset.title.toLowerCase();
-    let genre = crd.dataset.genre;
-    let platform = crd.dataset.platform;
-
-    let matchTitle    = fltrs.titleFilter    === "" || title.includes(fltrs.titleFilter);
-    let matchGenre    = fltrs.genreFilter    === "" || genre === fltrs.genreFilter;
-    let matchPlatform = fltrs.platformFilter === "" || platform.includes(fltrs.platformFilter);
-
-    return matchTitle && matchGenre && matchPlatform;
-}
-
-function getFilters() {
-    const titleEl = form.elements['title_filter'];
-    const genreEl = form.elements['genre_filter'];
-    const platformEl = form.elements['platform_filter'];
-    const sortEl = form.elements['sort_by'];
-
-    let titleFilter = (titleEl.value || '').trim().toLowerCase();
-    let genreFilter = genreEl.value || '';
-    let platformFilter = platformEl.value || '';
-    let sortBy = sortEl.value || 'title_asc';
-
-    return {
-        "titleFilter" : titleFilter,
-        "genreFilter" : genreFilter,
-        "platformFilter" : platformFilter,
-        "sortBy" : sortBy
-    };
+function applyFilters() {
+    const filters = getFilters();
+    cards.forEach(function (card) {
+        card.classList.toggle('hidden', !cardMatches(card, filters));
+    });
+    const visible = cards.filter(function (card) {
+        return !card.classList.contains('hidden');
+    });
+    const sorted = sortCards(visible, filters.sortBy);
+    sorted.forEach(function (card) {
+        cardsContainer.appendChild(card);
+    });
 }
 
 function clearFilters() {
     form.reset();
-    console.log("Clearing filters");
+    cards.forEach(function (card) {
+        card.classList.remove('hidden');
+    });
+    const byYear = sortCards(cards.slice(), 'year_asc');
+    byYear.forEach(function (card) {
+        cardsContainer.appendChild(card);
+    });
 }
+
+document.getElementById('apply_filters').addEventListener('click', (e) => {
+    e.preventDefault();
+    applyFilters();
+});
+document.getElementById('clear_filters').addEventListener('click', (e) => {
+    e.preventDefault();
+    clearFilters();
+});

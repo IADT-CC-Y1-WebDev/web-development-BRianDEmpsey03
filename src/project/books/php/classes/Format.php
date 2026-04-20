@@ -42,24 +42,26 @@ class Format {
         return null;
     }
 
-    // Find platforms by game (requires JOIN with game_platform table)
+    
     public static function findByBook($book_id) {
-        $db = DB::getInstance()->getConnection();
-        $stmt = $db->prepare("
-            SELECT f.*
-            FROM format p
-            INNER JOIN book_format gp ON p.id = gp.platform_id
-            WHERE gp.book_id = :book_id
-            ORDER BY f.name
-        ");
-        $stmt->execute(['book_id' => $bookId]);
+    $db = DB::getInstance()->getConnection();
 
-        $formats = [];
-        while ($row = $stmt->fetch()) {
-            $formats[] = new Format($row);
-        }
+    $stmt = $db->prepare("
+        SELECT f.*
+        FROM formats f
+        INNER JOIN book_format bf ON f.id = bf.format_id
+        WHERE bf.book_id = :book_id
+        ORDER BY f.name
+    ");
 
-        return $formats;
+    $stmt->execute(['book_id' => $book_id]);
+
+    $formats = [];
+    while ($row = $stmt->fetch()) {
+        $formats[] = new Format($row);
+    }
+
+    return $formats;
     }
     
     // Convert to array for JSON output

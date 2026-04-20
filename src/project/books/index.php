@@ -30,7 +30,7 @@ catch (PDOException $e) {
             </div>
             <?php if (!empty($books)) { ?>
                 <div class="width-12 filters">
-                    <form>
+                    <form id="filters">
                         <div>
                             <label for="title_filter">Title:</label>
                             <input type="text" id="title_filter" name="title_filter">
@@ -53,6 +53,16 @@ catch (PDOException $e) {
                                 <?php } ?>
                             </select>
                         </div>
+                        <div class="input">
+                            <label class="filter-label" for="sort_by">Sort:</label>
+                            <div>
+                                <select id="sort_by" name="sort_by">
+                                    <option value="title_asc">Title A–Z</option>
+                                    <option value="year_desc">Year (newest first)</option>
+                                    <option value="year_asc">Year (oldest first)</option>
+                                </select>
+                            </div>
+                        </div>
                         <div>
                             <button type="button" id="apply_filters">Apply Filters</button>
                             <button type="button" id="clear_filters">Clear Filters</button>
@@ -61,13 +71,23 @@ catch (PDOException $e) {
                 </div>
             <?php } ?>
         </div>
+        
         <div class="container">
             <?php if (empty($books)) { ?>
                 <p>No books found.</p>
             <?php } else { ?>
-                <div class="width-12 cards">
-                    <?php foreach ($books as $book) { ?>
-                        <div class="card">
+                <div class="width-12 cards" id="book_cards">
+                    <?php foreach ($books as $book) { 
+                        $bookFormats = Format::findByBook($book->id);
+                        $formatIds = array_map(fn($f) => $f->id, $bookFormats);
+                        ?>
+                            <div class="card"
+                            data-title="<?= h($book->title) ?>"
+                            data-publisher="<?= h($book->publisher_id) ?>"
+                            data-format="<?= h(implode(',', $formatIds)) ?>"
+                            data-year="<?= h($book->year) ?>"
+                            >
+
                             <div class="top-content">
                                 <h2>Title: <?= h($book->title) ?></h2>
                                 <p>Author: <?= h($book->author) ?></p>
@@ -85,5 +105,6 @@ catch (PDOException $e) {
                 </div>
             <?php } ?>
         </div>
-    </body>
+    </body> 
+    <script src = "js/books.js"></script>
 </html>
