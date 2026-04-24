@@ -29,12 +29,27 @@ require_once __DIR__ . '/lib/config.php';
         <h3>Your Solution:</h3>
         <div class="output">
             <?php
-            // TODO: Write your solution here
-            // 1. Get connection: $db = DB::getInstance()->getConnection();
-            // 2. Execute: SELECT COUNT(*) as total FROM books
+            // 1. Get connection via singleton
+            $db = DB::getInstance()->getConnection();
+
+            // 2. Execute count query
+            $stmt = $db->prepare("SELECT COUNT(*) as total FROM books");
+            $stmt->execute();
+            $row = $stmt->fetch();
+
             // 3. Display the count
-            // 4. Get DB::getInstance() twice and compare with ===
-            // 5. Display whether they are the same instance
+            echo "<p>Total books in database: " . $row['total'] . "</p>";
+
+            // 4. Get the instance twice and compare
+            $instanceOne = DB::getInstance();
+            $instanceTwo = DB::getInstance();
+
+            // 5. Check if they are the same instance
+            if ($instanceOne === $instanceTwo) {
+                echo "<p>Same instance: YES — singleton is working correctly.</p>";
+            } else {
+                echo "<p>Same instance: NO — something is wrong.</p>";
+            }
             ?>
         </div>
     </div>

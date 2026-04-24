@@ -41,13 +41,44 @@ catch (PDOException $e) {
         <h3>Your Solution:</h3>
         <div class="output">
             <?php
-            // TODO: Write your solution here
             // 1. INSERT a temporary book
+            $insertSql = "INSERT INTO books (title, author, year) VALUES (:title, :author, :year)";
+            $insertStmt = $db->prepare($insertSql);
+            $insertStmt->execute([
+                ':title'  => 'Temporary Book',
+                ':author' => 'Temp Author',
+                ':year'   => 2024
+            ]);
+
             // 2. Get the new ID
-            // 3. Display "Created book with ID: X"
-            // 4. DELETE FROM books WHERE id = :id
-            // 5. Check rowCount()
+            $newId = $db->lastInsertId();
+
+            // 3. Display the ID
+            echo "<p>Created book with ID: " . $newId . "</p>";
+
+            // 4. DELETE the book
+            $deleteSql = "DELETE FROM books WHERE id = :id";
+            $deleteStmt = $db->prepare($deleteSql);
+            $deleteStmt->execute([':id' => $newId]);
+
+            // 5. Check rowCount
+            if ($deleteStmt->rowCount() > 0) {
+                echo "<p>Book with ID " . $newId . " was deleted successfully.</p>";
+            } else {
+                echo "<p>No book was deleted.</p>";
+            }
+
             // 6. Try to fetch the book again to verify deletion
+            $fetchSql = "SELECT * FROM books WHERE id = :id";
+            $fetchStmt = $db->prepare($fetchSql);
+            $fetchStmt->execute([':id' => $newId]);
+            $book = $fetchStmt->fetch();
+
+            if ($book) {
+                echo "<p>Book still exists (something went wrong).</p>";
+            } else {
+                echo "<p>Confirmed: book with ID " . $newId . " no longer exists in the database.</p>";
+            }
             ?>
         </div>
     </div>
