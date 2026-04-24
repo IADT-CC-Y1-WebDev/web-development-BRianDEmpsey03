@@ -29,3 +29,20 @@ function countAboveThreshold(numbers, threshold) {
 
 console.log(countAboveThreshold([10, 15, 25, 30, 5, 40], 20));
 // 3
+
+// exercise 3
+function reverseWords(words) {
+  var result = [];
+
+  for (var i = 0; i < words.length; i++) {
+    var reversed = "";
+    for (var j = words[i].length - 1; j >= 0; j--) {
+      reversed = reversed + words[i][j];
+    }
+    result.push(reversed);
+  }
+
+  return result;
+}
+
+console.log(reverseWords(["hello", "world"]));
