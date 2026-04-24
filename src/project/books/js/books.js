@@ -1,91 +1,79 @@
-const form = document.getElementById('filters');
-const cardsContainer = document.getElementById("book_cards");
-const cards = Array.from(cardsContainer.querySelectorAll('.card'));
+var form = document.getElementById('filters');
+var cardsContainer = document.getElementById('book_cards');
+var cards = Array.from(cardsContainer.querySelectorAll('.card'));
 
 function getFilters() {
-    const titleEl = form.elements['title_filter'];
-    const publisherEl = form.elements['publisher_filter'];
-    const formatEl = form.elements['format_filter'];
-    const sortEl = form.elements['sort_by'];
-    return {
-        titleFilter: (titleEl.value || '').trim().toLowerCase(),
-        publisherFilter: publisherEl.value || '',
-        formatFilter: formatEl.value || '',
-        sortBy: sortEl.value || 'title_asc'
-    };
+  return {
+    titleFilter:form.elements['title_filter'].value.trim().toLowerCase(),
+    publisherFilter:form.elements['publisher_filter'].value,
+    formatFilter:form.elements['format_filter'].value,
+    sortBy:form.elements['sort_by'].value
+  };
 }
 
 function cardMatches(card, filters) {
-    const title = card.dataset.title.toLowerCase();
-    const publisher = card.dataset.publisher;
+  var title = card.dataset.title.toLowerCase();
+  var publisher = card.dataset.publisher;
+  var formats = card.dataset.format ? card.dataset.format.split(',') : [];
 
-    const formats = card.dataset.format
-        ? card.dataset.format.split(',')
-        : [];
+  if (filters.titleFilter && !title.includes(filters.titleFilter)) return false;
+  if (filters.publisherFilter && publisher !== filters.publisherFilter) return false;
+  if (filters.formatFilter && !formats.includes(filters.formatFilter)) return false;
 
-    const matchTitle =
-        filters.titleFilter === '' || title.includes(filters.titleFilter);
-
-    const matchPublisher =
-        filters.publisherFilter === '' ||
-        publisher === filters.publisherFilter;
-
-    const matchFormat =
-        filters.formatFilter === '' ||
-        formats.includes(filters.formatFilter);
-
-    return matchTitle && matchPublisher && matchFormat;
+  return true;
 }
 
 function sortCards(cards, sortBy) {
-    const list = cards.slice();
-    list.sort(function (a, b) {
-        const titleA = a.dataset.title.toLowerCase();
-        const titleB = b.dataset.title.toLowerCase();
-        const yearA = Number(a.dataset.year);
-        const yearB = Number(b.dataset.year);
-        if (sortBy === 'year_desc') return yearB - yearA;
-        if (sortBy === 'year_asc') return yearA - yearB;
-        return titleA.localeCompare(titleB);
-    });
-    return list;
+  return cards.slice().sort(function(a, b) {
+    var titleA = a.dataset.title.toLowerCase();
+    var titleB = b.dataset.title.toLowerCase();
+    var yearA  = Number(a.dataset.year);
+    var yearB  = Number(b.dataset.year);
+
+    if (sortBy === 'year_desc') return yearB - yearA;
+    if (sortBy === 'year_asc')  return yearA - yearB;
+    return titleA.localeCompare(titleB);
+  });
 }
 
 function applyFilters() {
-    const filters = getFilters();
-    cards.forEach(function (card) {
-        card.classList.toggle('hidden', !cardMatches(card, filters));
-    });
-    const visible = cards.filter(function (card) {
-        return !card.classList.contains('hidden');
-    });
-    const sorted = sortCards(visible, filters.sortBy);
-    sorted.forEach(function (card) {
-        cardsContainer.appendChild(card);
-    });
+  var filters = getFilters();
+
+  cards.forEach(function(card) {
+    card.classList.toggle('hidden', !cardMatches(card, filters));
+  });
+
+  var visible = cards.filter(function(card) {
+    return !card.classList.contains('hidden');
+  });
+
+  sortCards(visible, filters.sortBy).forEach(function(card) {
+    cardsContainer.appendChild(card);
+  });
 }
 
 function clearFilters() {
-    form.reset();
-    cards.forEach(function (card) {
-        card.classList.remove('hidden');
-    });
-    const byYear = sortCards(cards.slice(), 'year_asc');
-    byYear.forEach(function (card) {
-        cardsContainer.appendChild(card);
-    });
+  form.reset();
+
+  cards.forEach(function(card) {
+    card.classList.remove('hidden');
+  });
+
+  sortCards(cards, 'year_asc').forEach(function(card) {
+    cardsContainer.appendChild(card);
+  });
 }
 
-document.getElementById('apply_filters').addEventListener('click', (e) => {
-    e.preventDefault();
-    applyFilters();
+document.getElementById('apply_filters').addEventListener('click', function(e) {
+  e.preventDefault();
+  applyFilters();
 });
-document.getElementById('clear_filters').addEventListener('click', (e) => {
-    e.preventDefault();
-    clearFilters();
+
+document.getElementById('clear_filters').addEventListener('click', function(e) {
+  e.preventDefault();
+  clearFilters();
 });
 
 function myFunction() {
-  var element = document.body;
-  element.classList.toggle("dark-mode");
+  document.body.classList.toggle('dark-mode');
 }
